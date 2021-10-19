@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+All Products
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        {% if products %}
+            {% for c in products %}
+                <div class="col-12 col-sm-6 col-lg-3 w-25 mt-3 mb-3">
+                    <div class="card">
+                        <a href="{% url 'product' c.id %}">
+                            <img src="{{c.image.url}}" class="card-img-top">
+                        </a> 
+                        <div class="card-body">
+                        <a href="#" class="card-title"><a class="dropdown-tiems" href="{% url 'category' c.id %}">{{c.name}}</a></a>
+                        </div>
+                        <form method="POST" action="{% url 'addtocart' %}" styles="width: 500px;">
+                        {% csrf_token %}
+                            <input type="number" name="itemquant" value="1" min="{{c.min_quant}}" max="{{c.max_quant}}" style="width: 50px">
+                            <input type="hidden" name="itemid" value="{{c.id}}">
+                            <button type="submit" class="btn btn-primary">Add to cart</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+
+
+

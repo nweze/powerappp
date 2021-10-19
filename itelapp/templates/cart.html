@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% load mathfilters %}
+
+{% load humanize %}
+
+{% block title %} Cart Page {% endblock title %}
+
+{% block content %}
+    <div class="container-fluid m-5">
+        <div class="tow">
+        <div class="col-12 col-sm-6 col-ig-10">   
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Image</th>
+              <th scope="col">$price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+              {% if basket %}
+                {% for item in basket %}
+              <tr>
+                <td>
+                  <form method="POST" action="{% url 'deleteitem' %}">  
+                    {% csrf_token %}
+                    <input type="hidden" name="delitem" value="{{item.id}}">
+                    <button type="submit" class="btn btn-dangerous">&times;</button>
+                  </form>
+                </td>
+                <th scope="row">{{item.product.title}}</th>
+                <td><img src="{{item.product.image.url}}" width="60px"></td>
+                <td>{{item.product.price|floatformat:2|intcomma}}</td>
+                <td>
+                    {{item.quantity}}
+                </td>
+                <td>{{item.product.price|mul:item.quantity}}</td>
+              </tr>
+              <td>
+                <form method="POST" action="{% url 'increase' %}">
+                  {% csrf_token %}
+                  <input type="number" name="additems" styles="Width: 40px;" value="{{item.quantity}}" min="{{item.product.min_quant}}" max="{{item.product.max_quant}}">
+                  <input type="hidden" name="itemid" value="{{item.id}}">
+                  <button type="submit" class="btn btn-primary">&times;</button>
+                </form>
+              </td>
+              {% endfor %}
+            {% endif %}
+          </tbody>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>subtotal:{{subtotal|floatformat:2|intcomma}}</td>
+          </tr>
+          <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>vat:{{vat|floatformat:2|intcomma}}</td>
+          </tr>
+          <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>total:{{total|floatformat:2|intcomma}}</td>
+          </tr>
+        </thead>
+        </tbody>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a href="{% url 'checkout' %}">Checkout</a></td>
+          </tr>
+        </tbody>
+        </table>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-2">
+    </div>
+    </div>
+    {% endblock content %}
+    

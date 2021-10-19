@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Login Page
+{% endblock title %}
+
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="col-12 col-sm-3 col-1g-3"></div>
+        <div class="col-12 col-sm-6 col-1g-6"></div>
+    </div>    
+    
+    
+    <form method="POST" action="{% url 'loginpage' %}">
+    {% csrf_token %}
+        <div class="form-group">
+          <label for="exampleInputText1" class="form-label">Username</label>
+          <input type="text" name="username" class="form-control" id="exampleInputText1" aria-describedby="testHelp">
+          <div id="testHelp" class="form-text">Logn in to your account.</div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+  
+{% endblock content %}

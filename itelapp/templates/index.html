@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid m-5">
+  <h1>Categories</h1>
+    <div class="row p-5">
+      {% if categories %}
+        {% for c in categories %}
+            <div class="col-12 col-sm-6 col-lg-3 w-25 mt-3 mb-3">
+                <div class="card">
+                    <a href="{% url 'products'%}"></a>
+                    <img src="{{c.image.url}}" class="card-img-top">
+                    <div class="card-body">
+                    <a href="#" class="card-title">{{c.category}}</a>
+                    <p class="cars-text">product:{{c.ctitle}}</p>
+                    <p class="cars-text">price:{{c.price}}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+    </div>
+</div>
+<!--  -->
+<div class="container-fluid">
+  <h1>Best Seller</h1>
+    <div class="row">
+      {% if bseller %}
+        {% for c in bseller %}
+            <div class="col-12 col-sm-6 col-lg-3 w-25 mt-3 mb-3">
+                <div class="card">
+                    <a href="{% url 'products' %}"></a>
+                    <img src="{{c.image.url}}" class="card-img-top">
+                    <div class="card-body">
+                    <a href="#" class="card-title">{{c.category}}</a>
+                    <p class="cars-text">product:{{c.title}}</p>
+                    <p class="cars-text">price:{{c.price}}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+</div>
+<!--  -->
+<div class="container-fluid">
+  <h1>Latest</h1>
+    <div class="row">
+      {% if latest %}
+        {% for c in latest %}
+            <div class="col-12 col-sm-6 col-lg-3 w-25 mt-3 mb-3">
+                <div class="card">
+                    <a href="{% url 'products' %}"></a>
+                    <img src="{{ c.image.url }}" class="card-img-top">
+                    <div class="card-body">
+                    <a href="#" class="card-title">{{c.category}}</a>
+                    <p class="cars-text">product:{{c.title}}</p>
+                    <p class="cars-text">price:{{c.price}}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+</div>
+<!--  -->
+{% endblock content %}
