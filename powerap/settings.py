@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'powerap.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'powerappp',
+        'NAME': 'powerapppp',
         'USER': 'Dominic',
         'PASSWORD':'dominic',
         'HOST': '127.0.0.1',
