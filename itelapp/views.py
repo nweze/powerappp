@@ -239,7 +239,7 @@ def sendorder(request):
         curl = 'https://api.paystack.co/transaction/initialize'
         # cburl = 'http://127.0.0.1:8000/completed'
         # cburl = 'http://3.140.1.114/completed'
-        cburl = 'http://3.133.92.138/completed'
+        cburl = 'http://3.141.100.189/completed'
         
 
         price = float(request.POST['price']) * 100
